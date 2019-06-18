@@ -53,13 +53,13 @@ func ContainerConsole(result string) {
 
 func main() {
 	parser := argparse.NewParser("dbash", "Quickly gain console access to a Docker container")
-	Container := parser.String("c", "container", &argparse.Options{Required: false, Help: "Container to connect to"})
-	//Logs := parser.String("l", "logs", &argparse.Options{Required: false, Help: "Show Logs (DEFAULT: Connect to t"})
-
+	Container := parser.String("c", "container", &argparse.Options{Required: false, Help: "Container to connect"})
+	Logs := parser.String("l", "logs", &argparse.Options{Required: false, Help: "Show logs", Default: false})
 	err := parser.Parse(os.Args)
 	if err != nil {
 		fmt.Print(parser.Usage(err))
 	}
+	fmt.Println(*Logs)
 	fmt.Println(*Container)
 	container := *Container
 	if container != `` {
