@@ -1,0 +1,9 @@
+if ! [ -x "$(command -v go)" ]; then
+  echo 'Error: go is not installed.' >&2
+  exit 1
+fi
+go get github.com/manifoldco/promptui
+go get github.com/docker/docker/api/types
+go get github.com/docker/docker/client
+go get golang.org/x/net/context
+go get github.com/akamensky/argparse
