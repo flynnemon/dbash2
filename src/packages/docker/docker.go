@@ -37,7 +37,7 @@ func GetContainers() []models.Container {
 	return output
 }
 
-func CommandPrep(_container string, _cmdPath string) error {
+func ConsoleCommandPrep(_container string, _cmdPath string) error {
 	cmd := exec.Command("docker", "exec", "-it", _container, _cmdPath)
 	cmd.Stdout = os.Stdout
 	cmd.Stdin = os.Stdin
@@ -48,8 +48,16 @@ func CommandPrep(_container string, _cmdPath string) error {
 }
 
 func ContainerConsole(_container string) {
-	err := CommandPrep(_container, "/bin/bash")
+	err := ConsoleCommandPrep(_container, "/bin/bash")
 	if err != nil {
-		CommandPrep(_container, "/bin/sh")
+		ConsoleCommandPrep(_container, "/bin/sh")
 	}
+}
+
+func ContainerLogs(_container string, _backlog string) {
+	cmd := exec.Command("docker", "logs", "-f", "--tail", _backlog, _container)
+	cmd.Stdout = os.Stdout
+	cmd.Stdin = os.Stdin
+	cmd.Stderr = os.Stderr
+	cmd.Run()
 }

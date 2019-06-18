@@ -10,3 +10,11 @@ type Container struct {
 	ID			string
 	State		string
 }
+
+type Args struct {
+	Container     	string
+	Kubernetes		bool
+	Version			bool
+	Logs			bool
+	LogLength		string
+}
